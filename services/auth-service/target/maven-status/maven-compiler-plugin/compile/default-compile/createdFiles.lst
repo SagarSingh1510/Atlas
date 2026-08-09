@@ -1,0 +1,6 @@
+com\atlas\auth\AuthServiceApplication.class
+com\atlas\auth\model\HealthStatus.class
+com\atlas\auth\dto\HealthResponse.class
+com\atlas\auth\controller\HealthController.class
+com\atlas\auth\dto\RegisterRequest.class
+com\atlas\auth\dto\RegisterResponse.class
