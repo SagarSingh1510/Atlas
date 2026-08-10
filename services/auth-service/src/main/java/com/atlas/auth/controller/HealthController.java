@@ -6,7 +6,6 @@ import com.atlas.auth.dto.HealthResponse;
 import com.atlas.auth.model.HealthStatus;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController

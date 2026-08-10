@@ -1,7 +1,15 @@
 E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\AuthServiceApplication.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\controller\AuthController.java
 E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\controller\HealthController.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\dto\ErrorResponse.java
 E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\dto\HealthResponse.java
 E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\dto\RegisterRequest.java
 E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\dto\RegisterResponse.java
 E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\entity\User.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\exception\DuplicateUserException.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\exception\GlobalExceptionHandler.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\mapper\UserMapper.java
 E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\model\HealthStatus.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\repository\UserRepository.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\security\SecurityConfig.java
+E:\project\Atlas\services\auth-service\src\main\java\com\atlas\auth\service\AuthService.java
