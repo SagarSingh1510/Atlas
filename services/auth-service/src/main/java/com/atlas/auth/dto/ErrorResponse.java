@@ -1,5 +1,7 @@
 package com.atlas.auth.dto;
 
-public record ErrorResponse(int status, String message) {
+import java.util.Map;
+
+public record ErrorResponse(int status, String message,Map<String,String> errors) {
     
 }
