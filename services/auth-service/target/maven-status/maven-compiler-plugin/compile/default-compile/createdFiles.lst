@@ -10,12 +10,15 @@ com\atlas\auth\repository\UserRepository.class
 com\atlas\auth\mapper\UserMapper.class
 com\atlas\auth\security\CustomUserDetailsService.class
 com\atlas\auth\security\JwtAuthenticationFilter.class
+com\atlas\auth\service\UserService.class
 com\atlas\auth\dto\RegisterResponse.class
 com\atlas\auth\service\AuthService.class
 com\atlas\auth\AuthServiceApplication.class
 com\atlas\auth\dto\HealthResponse.class
 com\atlas\auth\dto\LoginResponse.class
+com\atlas\auth\dto\UserResponse.class
 com\atlas\auth\controller\AuthController.class
 com\atlas\auth\exception\GlobalExceptionHandler.class
 com\atlas\auth\dto\ErrorResponse.class
+com\atlas\auth\controller\UserController.class
 com\atlas\auth\exception\DuplicateUserException.class

@@ -26,4 +26,16 @@ public class UserService {
                 user.getEmail()
         );
     }
+
+    public UserResponse getUser(Long id){
+        User user=userRepository.findById(id)
+                .orElseThrow(()->
+                        new UsernameNotFoundException("User Not Found"));
+
+        return new UserResponse(
+            user.getId(),
+            user.getUsername(),
+            user.getEmail()
+        );
+    }
 }

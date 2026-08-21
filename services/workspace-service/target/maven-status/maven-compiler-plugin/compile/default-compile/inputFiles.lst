@@ -1,0 +1,15 @@
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\client\AuthServiceClient.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\controller\WorkspaceController.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\dto\AuthUserResponse.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\dto\CreateWorkspaceRequest.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\dto\UpdateWorkspaceRequest.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\dto\WorkspaceResponse.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\entity\Workspace.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\exception\GlobalExceptionHandler.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\exception\WorkspaceNotFoundException.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\repository\WorkspaceRepository.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\security\JwtAuthenticationFilter.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\security\JwtService.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\security\SecurityConfig.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\service\WorkspaceService.java
+E:\project\Atlas\services\workspace-service\src\main\java\com\atlas\workspace\WorkSpaceServiceApplication.java

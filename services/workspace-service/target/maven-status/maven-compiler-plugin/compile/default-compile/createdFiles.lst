@@ -1,0 +1,14 @@
+com\atlas\workspace\dto\WorkspaceResponse.class
+com\atlas\workspace\security\JwtAuthenticationFilter.class
+com\atlas\workspace\service\WorkspaceService.class
+com\atlas\workspace\security\JwtService.class
+com\atlas\workspace\WorkSpaceServiceApplication.class
+com\atlas\workspace\client\AuthServiceClient.class
+com\atlas\workspace\dto\AuthUserResponse.class
+com\atlas\workspace\entity\Workspace.class
+com\atlas\workspace\exception\WorkspaceNotFoundException.class
+com\atlas\workspace\controller\WorkspaceController.class
+com\atlas\workspace\repository\WorkspaceRepository.class
+com\atlas\workspace\security\SecurityConfig.class
+com\atlas\workspace\exception\GlobalExceptionHandler.class
+com\atlas\workspace\dto\CreateWorkspaceRequest.class
