@@ -26,6 +26,19 @@ services:
     volumes:
       - workspace-postgres-data:/var/lib/postgresql/data
 
+  task-postgres:
+    image: postgres:17
+    container_name: atlas-task-postgres
+    environment:
+      POSTGRES_DB: atlas_task
+      POSTGRES_USER: atlas_task
+      POSTGRES_PASSWORD: admin12341
+    ports:
+      - "5434:5432"
+    volumes:
+      - task-postgres-data:/var/lib/postgresql/data
+
 volumes:
   postgres-data:
   workspace-postgres-data:
+  task-postgres-data:

@@ -1,1 +1,16 @@
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\client\WorkspaceServiceClient.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\controller\TaskController.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\dto\CreateTaskRequest.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\dto\TaskResponse.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\dto\UpdateTaskRequest.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\entity\Task.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\entity\TaskStatus.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\exception\GlobalExceptionHandler.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\exception\TaskNotFoundException.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\exception\WorkspaceAccessDeniedException.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\repository\TaskRepository.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\security\JwtAuthenticationFilter.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\security\JwtService.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\security\SecurityConfig.java
+E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\service\TaskService.java
 E:\project\Atlas\services\task-service\src\main\java\com\atlas\task\TaskServiceApplication.java

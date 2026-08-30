@@ -1,0 +1,9 @@
+com\atlas\task\repository\TaskRepository.class
+com\atlas\task\dto\CreateTaskRequest.class
+com\atlas\task\TaskServiceApplication.class
+com\atlas\task\dto\UpdateTaskRequest.class
+com\atlas\task\entity\Task.class
+com\atlas\task\controller\TaskController.class
+com\atlas\task\service\TaskService.class
+com\atlas\task\dto\TaskResponse.class
+com\atlas\task\entity\TaskStatus.class
