@@ -30,6 +30,11 @@
         <module>services/workspace-service</module>
         <module>services/auth-service</module>
         <module>services/task-service</module>
+        <module>services/diagram-service</module>
+        <module>services/deployment-service</module>
+        <module>services/simulation-service</module>
+        <module>services/ai-review-service</module>
+        <module>services/api-gateway</module>
     </modules>
 
 </project>

@@ -4,12 +4,12 @@ services:
     container_name: atlas-postgres
 
     environment:
-      POSTGRES_DB: atlas
-      POSTGRES_USER: atlas
-      POSTGRES_PASSWORD: admin12341
+      POSTGRES_DB: ${ATLAS_AUTH_DB_NAME}
+      POSTGRES_USER: ${ATLAS_AUTH_DB_USER}
+      POSTGRES_PASSWORD: ${ATLAS_AUTH_DB_PASSWORD}
 
     ports:
-      - "5432:5432"
+      - "55432:5432"
 
     volumes:
       - postgres-data:/var/lib/postgresql/data
@@ -18,9 +18,9 @@ services:
     image: postgres:17
     container_name: atlas-workspace-postgres
     environment:
-      POSTGRES_DB: atlas_workspace
-      POSTGRES_USER: atlas_workspace
-      POSTGRES_PASSWORD: admin1121
+      POSTGRES_DB: ${ATLAS_WORKSPACE_DB_NAME}
+      POSTGRES_USER: ${ATLAS_WORKSPACE_DB_USER}
+      POSTGRES_PASSWORD: ${ATLAS_WORKSPACE_DB_PASSWORD}
     ports:
       - "5433:5432"
     volumes:
@@ -30,15 +30,67 @@ services:
     image: postgres:17
     container_name: atlas-task-postgres
     environment:
-      POSTGRES_DB: atlas_task
-      POSTGRES_USER: atlas_task
-      POSTGRES_PASSWORD: admin12341
+      POSTGRES_DB: ${ATLAS_TASK_DB_NAME}
+      POSTGRES_USER: ${ATLAS_TASK_DB_USER}
+      POSTGRES_PASSWORD: ${ATLAS_TASK_DB_PASSWORD}
     ports:
       - "5434:5432"
     volumes:
       - task-postgres-data:/var/lib/postgresql/data
 
+  diagram-postgres:
+    image: postgres:17
+    container_name: atlas-diagram-postgres
+    environment:
+      POSTGRES_DB: ${ATLAS_DIAGRAM_DB_NAME}
+      POSTGRES_USER: ${ATLAS_DIAGRAM_DB_USER}
+      POSTGRES_PASSWORD: ${ATLAS_DIAGRAM_DB_PASSWORD}
+    ports:
+      - "5435:5432"
+    volumes:
+      - diagram-postgres-data:/var/lib/postgresql/data
+
+  deployment-postgres:
+    image: postgres:17
+    container_name: atlas-deployment-postgres
+    environment:
+      POSTGRES_DB: ${ATLAS_DEPLOYMENT_DB_NAME}
+      POSTGRES_USER: ${ATLAS_DEPLOYMENT_DB_USER}
+      POSTGRES_PASSWORD: ${ATLAS_DEPLOYMENT_DB_PASSWORD}
+    ports:
+      - "5436:5432"
+    volumes:
+      - deployment-postgres-data:/var/lib/postgresql/data
+
+  simulation-postgres:
+    image: postgres:17
+    container_name: atlas-simulation-postgres
+    environment:
+      POSTGRES_DB: ${ATLAS_SIMULATION_DB_NAME}
+      POSTGRES_USER: ${ATLAS_SIMULATION_DB_USER}
+      POSTGRES_PASSWORD: ${ATLAS_SIMULATION_DB_PASSWORD}
+    ports:
+      - "5437:5432"
+    volumes:
+      - simulation-postgres-data:/var/lib/postgresql/data
+
+  ai-review-postgres:
+    image: postgres:17
+    container_name: atlas-ai-review-postgres
+    environment:
+      POSTGRES_DB: ${ATLAS_AI_REVIEW_DB_NAME}
+      POSTGRES_USER: ${ATLAS_AI_REVIEW_DB_USER}
+      POSTGRES_PASSWORD: ${ATLAS_AI_REVIEW_DB_PASSWORD}
+    ports:
+      - "5438:5432"
+    volumes:
+      - ai-review-postgres-data:/var/lib/postgresql/data
+
 volumes:
   postgres-data:
   workspace-postgres-data:
   task-postgres-data:
+  diagram-postgres-data:
+  deployment-postgres-data:
+  simulation-postgres-data:
+  ai-review-postgres-data:

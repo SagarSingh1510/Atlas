@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas Console</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div>
+          <h1>Atlas</h1>
+          <p>Microservice workflow console</p>
+        </div>
+      </div>
+
+      <section class="panel auth-panel">
+        <div class="panel-header">
+          <h2>Access</h2>
+          <span id="authState" class="status-pill muted">Signed out</span>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Authentication">
+          <button id="loginTab" class="tab active" type="button">Login</button>
+          <button id="registerTab" class="tab" type="button">Register</button>
+        </div>
+        <form id="authForm" class="form-stack">
+          <label id="emailField" class="field hidden">
+            <span>Email</span>
+            <input id="email" type="email" autocomplete="email" placeholder="you@example.com">
+          </label>
+          <label class="field">
+            <span>Username</span>
+            <input id="username" type="text" autocomplete="username" placeholder="sagar">
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input id="password" type="password" autocomplete="current-password" minlength="8" maxlength="20" placeholder="8 to 20 characters">
+          </label>
+          <button id="authSubmit" class="primary-button" type="submit">Login</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Services</h2>
+          <button id="refreshHealth" class="icon-button" type="button" title="Refresh service health">Refresh</button>
+        </div>
+        <div id="serviceHealth" class="health-list"></div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Workflow</p>
+          <h2>Workspace to diagram to deployment</h2>
+        </div>
+        <div class="topbar-actions">
+          <span id="currentUser" class="user-chip">No active user</span>
+          <button id="logoutButton" class="ghost-button" type="button">Logout</button>
+        </div>
+      </header>
+
+      <section class="workspace-band">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 1</p>
+            <h3>Workspaces</h3>
+          </div>
+          <form id="workspaceForm" class="inline-form">
+            <input id="workspaceName" type="text" placeholder="New workspace name">
+            <button class="primary-button" type="submit">Create</button>
+          </form>
+        </div>
+        <div id="workspaceList" class="list-row"></div>
+      </section>
+
+      <section class="grid-two">
+        <div class="work-surface">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Step 2</p>
+              <h3>Tasks</h3>
+            </div>
+          </div>
+          <form id="taskForm" class="form-grid">
+            <input id="taskTitle" type="text" placeholder="Task title">
+            <input id="taskDescription" type="text" placeholder="Task description">
+            <button class="primary-button" type="submit">Add Task</button>
+          </form>
+          <div id="taskList" class="item-list"></div>
+        </div>
+
+        <div class="work-surface">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Step 3</p>
+              <h3>Diagrams</h3>
+            </div>
+          </div>
+          <form id="diagramForm" class="form-stack">
+            <input id="diagramName" type="text" placeholder="Diagram name">
+            <textarea id="diagramDefinition" rows="6" placeholder='{"nodes":["api","service","db"],"edges":["api->service","service->db"]}'></textarea>
+            <button class="primary-button" type="submit">Create Diagram</button>
+          </form>
+          <div id="diagramList" class="item-list"></div>
+        </div>
+      </section>
+
+      <section class="workflow-band">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Step 4</p>
+            <h3>Deployment, Simulation, AI Review</h3>
+          </div>
+          <button id="refreshWorkflow" class="ghost-button" type="button">Refresh</button>
+        </div>
+        <div class="workflow-grid">
+          <div>
+            <h4>Deployments</h4>
+            <div id="deploymentList" class="item-list compact"></div>
+          </div>
+          <div>
+            <h4>Simulations</h4>
+            <div id="simulationList" class="item-list compact"></div>
+          </div>
+          <div>
+            <h4>AI Reviews</h4>
+            <div id="reviewList" class="item-list compact"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
