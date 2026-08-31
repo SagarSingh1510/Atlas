@@ -1,7 +1,9 @@
 package com.atlas.auth.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.atlas.auth.dto.LoginRequest;
 import com.atlas.auth.dto.LoginResponse;
@@ -26,6 +28,7 @@ public class AuthService {
         this.jwtService=jwtService;
     }
 
+    @Transactional
     public RegisterResponse register(RegisterRequest request){
         if(userRepository.existsByUsername(request.username())){
             throw new DuplicateUserException("Username already exists.");
@@ -33,7 +36,12 @@ public class AuthService {
         if(userRepository.existsByEmail(request.email()))throw new DuplicateUserException("Email already exists.");
         String hashPassword = passwordEncoder.encode(request.password());
         User user=new User(request.username(),request.email(),hashPassword);
-        User savedUser=userRepository.save(user);
+        User savedUser;
+        try {
+            savedUser=userRepository.save(user);
+        } catch (DataIntegrityViolationException ex) {
+            throw new DuplicateUserException("Username or email already exists.");
+        }
         return UserMapper.toRegisterResponse(savedUser);
     }
 
