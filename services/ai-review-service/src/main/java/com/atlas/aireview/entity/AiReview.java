@@ -11,15 +11,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ai_reviews")
+@Table(name = "ai_reviews", uniqueConstraints = @UniqueConstraint(name = "uk_review_deployment", columnNames = "deployment_id"))
 public class AiReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "deployment_id", nullable = false)
     private Long deploymentId;
 
     @Column(nullable = false)

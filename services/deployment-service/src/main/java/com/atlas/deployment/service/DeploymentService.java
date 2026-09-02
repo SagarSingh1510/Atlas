@@ -1,39 +1,33 @@
 package com.atlas.deployment.service;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.atlas.deployment.client.AiReviewServiceClient;
-import com.atlas.deployment.client.SimulationServiceClient;
-import com.atlas.deployment.dto.AiReviewResponse;
-import com.atlas.deployment.dto.CreateAiReviewRequest;
 import com.atlas.deployment.dto.CreateDeploymentRequest;
-import com.atlas.deployment.dto.CreateSimulationRequest;
 import com.atlas.deployment.dto.DeploymentResponse;
-import com.atlas.deployment.dto.SimulationResponse;
 import com.atlas.deployment.entity.Deployment;
 import com.atlas.deployment.entity.DeploymentStatus;
 import com.atlas.deployment.exception.DeploymentNotFoundException;
 import com.atlas.deployment.repository.DeploymentRepository;
+import com.atlas.events.DeploymentRequestedEvent;
+import com.atlas.events.ReviewCompletedEvent;
 
 @Service
 public class DeploymentService {
     private final DeploymentRepository deploymentRepository;
-    private final SimulationServiceClient simulationServiceClient;
-    private final AiReviewServiceClient aiReviewServiceClient;
+    private final ApplicationEventPublisher eventPublisher;
 
     public DeploymentService(
             DeploymentRepository deploymentRepository,
-            SimulationServiceClient simulationServiceClient,
-            AiReviewServiceClient aiReviewServiceClient
+            ApplicationEventPublisher eventPublisher
     ) {
         this.deploymentRepository = deploymentRepository;
-        this.simulationServiceClient = simulationServiceClient;
-        this.aiReviewServiceClient = aiReviewServiceClient;
+        this.eventPublisher = eventPublisher;
     }
 
     @Transactional
@@ -41,34 +35,26 @@ public class DeploymentService {
         Deployment deployment = deploymentRepository.save(
                 new Deployment(request.diagramId(), request.workspaceId(), request.diagramName(), request.diagramDefinition())
         );
+        eventPublisher.publishEvent(new DeploymentRequestedEvent(
+                UUID.randomUUID().toString(),
+                deployment.getId(),
+                deployment.getDiagramId(),
+                deployment.getWorkspaceId(),
+                deployment.getDiagramDefinition(),
+                Instant.now()
+        ));
+        return toResponse(deployment);
+    }
 
-        try {
-            SimulationResponse simulation = simulationServiceClient.runSimulation(
-                    new CreateSimulationRequest(
-                            deployment.getId(),
-                            deployment.getDiagramId(),
-                            deployment.getWorkspaceId(),
-                            deployment.getDiagramDefinition()
-                    ),
-                    getJwt()
-            );
-            AiReviewResponse review = aiReviewServiceClient.createReview(
-                    new CreateAiReviewRequest(
-                            deployment.getId(),
-                            simulation.id(),
-                            deployment.getDiagramId(),
-                            deployment.getDiagramDefinition()
-                    ),
-                    getJwt()
-            );
-            deployment.setSimulationId(simulation.id());
-            deployment.setAiReviewId(review.id());
-            deployment.setStatus(DeploymentStatus.SUCCEEDED);
-        } catch (Exception e) {
-            deployment.setStatus(DeploymentStatus.FAILED);
+    @Transactional
+    public void completeDeployment(ReviewCompletedEvent event) {
+        Deployment deployment = getDeploymentEntity(event.deploymentId());
+        if (deployment.getStatus() == DeploymentStatus.SUCCEEDED) {
+            return;
         }
-
-        return toResponse(deploymentRepository.save(deployment));
+        deployment.setSimulationId(event.simulationId());
+        deployment.setAiReviewId(event.reviewId());
+        deployment.setStatus(DeploymentStatus.SUCCEEDED);
     }
 
     public DeploymentResponse getDeployment(Long id) {
@@ -85,11 +71,6 @@ public class DeploymentService {
     private Deployment getDeploymentEntity(Long id) {
         return deploymentRepository.findById(id)
                 .orElseThrow(() -> new DeploymentNotFoundException("Deployment with id " + id + " not found"));
-    }
-
-    private String getJwt() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (String) authentication.getCredentials();
     }
 
     private DeploymentResponse toResponse(Deployment deployment) {

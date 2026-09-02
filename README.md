@@ -15,8 +15,8 @@ Atlas lets a user:
 - Add tasks inside a workspace.
 - Create architecture or workflow diagrams for a workspace.
 - Deploy a diagram through the deployment service.
-- Run a deployment simulation.
-- Generate an AI-style review summary and score for the deployment.
+- Process deployment, simulation, and AI review asynchronously through Kafka events.
+- Protect gateway API traffic with Redis-backed rate limiting.
 - Use a single frontend served by the API gateway.
 
 ## Architecture
@@ -32,7 +32,19 @@ The system is split into focused services:
 - `simulation-service` on port `8085`: records deployment simulation results.
 - `ai-review-service` on port `8086`: records AI review summaries and scores.
 
-Each service uses its own PostgreSQL container so the project behaves like a real microservice system rather than a single shared database app.
+Each service uses its own PostgreSQL container so the project behaves like a real microservice system rather than a single shared database app. Kafka connects the deployment pipeline asynchronously, and Redis stores shared gateway rate-limit counters.
+
+## Async Deployment Flow
+
+Atlas uses Kafka for the deploy -> simulate -> review workflow:
+
+1. A diagram deployment request creates a deployment with `PENDING` status.
+2. Deployment Service publishes `atlas.deployment.requested.v1` after the database commit.
+3. Simulation Service consumes the event, records a simulation, and publishes `atlas.simulation.completed.v1`.
+4. AI Review Service consumes the simulation event, records a deterministic review, and publishes `atlas.review.completed.v1`.
+5. Deployment Service consumes the review event and marks the deployment `SUCCEEDED`.
+
+Simulation and review records are idempotent by deployment ID, so repeated Kafka deliveries do not intentionally create duplicate processing rows.
 
 ## Local Setup
 
